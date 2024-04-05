@@ -1,15 +1,20 @@
 const withPlugins = require("next-compose-plugins");
-const optimizedImages = require("next-optimized-images");
+const withOptimizedImages = require("next-optimized-images");
 
 const nextConfig = {
   env: {
     NEXT_PUBLIC_STRAPI_API_URL: process.env.NEXT_PUBLIC_STRAPI_API_URL,
     NEXT_PUBLIC_MARKETING_HOST: process.env.NEXT_PUBLIC_MARKETING_HOST,
     NEXT_PUBLIC_APP_HOST: process.env.NEXT_PUBLIC_APP_HOST,
-    NEXT_PUBLIC_APP_HOST: process.env.NEXT_PUBLIC_APP_HOST,
+    NEXT_SANITY_PROJECT_ID: process.env.NEXT_SANITY_PROJECT_ID,
+    NEXT_SANITY_DATASET: process.env.NEXT_SANITY_DATASET,
   },
   async redirects() {
     return [];
+  },
+  images: {
+    loader: "imgix",
+    path: `${process.env.NEXT_PUBLIC_MARKETING_HOST}/`,
   },
 };
 
@@ -29,11 +34,10 @@ const withMDX = require("@next/mdx")({
 const config = withPlugins(
   [
     [
-      optimizedImages,
-      {
+      withOptimizedImages({
         // optimisation disabled by default, to enable check https://github.com/cyrilwanner/next-optimized-images
-        optimizeImages: false,
-      },
+        optimizedImages: false
+      })
     ],
     [
       withMDX({

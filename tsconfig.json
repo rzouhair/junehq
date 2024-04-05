@@ -16,6 +16,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "custom.d.ts", "lib/theme/colors.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "custom.d.ts", "lib/theme/colors.js", "scripts/generateMdxPosts.js"],
   "exclude": ["node_modules"]
 }
